@@ -1,3 +1,12 @@
+import { MovieList } from "../../components/MovieList/MovieList";
+import style from "./Home.module.css";
+
 export const Home = () => {
-  return <h1>Home</h1>;
+  return (
+    <>
+      <article className={style.banner_img}>
+        <MovieList />
+      </article>
+    </>
+  );
 };
