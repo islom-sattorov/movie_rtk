@@ -1,0 +1,22 @@
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+:root{
+    font-size: 1em;
+    font-weight: 400;
+}
+
+body{
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+}
+
+.container{
+    max-width: 1440px;
+    margin: 0 auto;
+}
