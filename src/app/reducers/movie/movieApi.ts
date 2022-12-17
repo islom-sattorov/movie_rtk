@@ -3,12 +3,15 @@ import { apiSlice } from "../../api/apiSlice";
 
 export const movieApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getMovies: build.query<FetchArgs, { apiKey: string; s: string }>({
+    getMovies: build.query<
+      FetchArgs,
+      { apiKey: string; s: string; type: string }
+    >({
       query: (arg) => {
-        const { apiKey, s } = arg;
+        const { apiKey, s, type } = arg;
         return {
           url: ``,
-          params: { apiKey, s },
+          params: { apiKey, s, type },
         };
       },
       providesTags: ["Movie"],

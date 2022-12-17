@@ -8,7 +8,7 @@ export const Home = () => {
     data = [],
     isLoading,
     isFetching,
-  } = useGetMoviesQuery({ apiKey: movieAPIKEY, s: "Harry" });
+  } = useGetMoviesQuery({ apiKey: movieAPIKEY, s: "Harry", type: "Movie" });
 
   console.log(data);
 
