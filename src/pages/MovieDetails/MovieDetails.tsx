@@ -1,3 +1,3 @@
 export const MovieDetails = () => {
-  return;
+  return <h1>MovieDetails</h1>;
 };

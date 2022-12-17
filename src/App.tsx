@@ -1,7 +1,8 @@
 import "./App.css";
+import { InitRoutes } from "./routes/InitRoutes";
 
 function App() {
-  return <h1>test</h1>;
+  return <InitRoutes />;
 }
 
 export default App;
