@@ -10,11 +10,13 @@ export const InitRoutes = () => {
   return (
     <section className={styles.routes}>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movie/:imdbID" element={<MovieDetails />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <article className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movie/:imdbID" element={<MovieDetails />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </article>
       <Footer />
     </section>
   );

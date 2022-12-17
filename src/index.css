@@ -18,9 +18,14 @@
 body{
     min-height: 100vh;
     text-rendering: optimizeSpeed;
+    background-color: var(--primary-color);
+}
+
+html{
+    font-family: sans-serif;
 }
 
 .container{
     max-width: 1440px;
-    margin: 0 auto;
+    margin: 0 40px;
 }
