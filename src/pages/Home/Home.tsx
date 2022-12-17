@@ -1,15 +1,11 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { movieAPIKEY } from "../../app/api/apiSlice";
 import { useGetMoviesQuery } from "../../app/reducers/movie/movieApi";
+import { addMovie } from "../../app/reducers/movie/movieSlice";
 import { MovieList } from "../../components/MovieList/MovieList";
+import { movieData } from "../../types/types";
 import style from "./Home.module.css";
-
-interface movieData {
-  Poster: string;
-  Title: string;
-  Type: string;
-  Year: string;
-  imdbID: string;
-}
 
 interface apiReq {
   Response: string;
@@ -18,11 +14,19 @@ interface apiReq {
 }
 
 export const Home = () => {
-  const { data, isLoading, isFetching, isError } = useGetMoviesQuery({
-    apiKey: movieAPIKEY,
-    s: "Harry",
-    type: "Movie",
-  });
+  const [test, setTest] = useState<any>();
+  const dispatch = useDispatch();
+  const { data, isLoading, isFetching, isError, isSuccess } = useGetMoviesQuery(
+    {
+      apiKey: movieAPIKEY,
+      s: "Harry",
+      type: "Movie",
+    }
+  );
+
+  useEffect(() => {
+    dispatch(addMovie(data?.Search));
+  }, [data]);
 
   if (isLoading) return <h2>"Loading..."</h2>;
 

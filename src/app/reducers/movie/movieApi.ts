@@ -1,12 +1,8 @@
-import { FetchArgs } from "@reduxjs/toolkit/dist/query";
 import { apiSlice } from "../../api/apiSlice";
 
 export const movieApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getMovies: build.query<
-      FetchArgs,
-      { apiKey: string; s: string; type: string }
-    >({
+    getMovies: build.query<any, { apiKey: string; s: string; type: string }>({
       query: (arg) => {
         const { apiKey, s, type } = arg;
         return {
