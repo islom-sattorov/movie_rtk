@@ -1,0 +1,26 @@
+.card_item{
+    background: var(--secondary-color);
+    cursor: pointer;
+}
+
+.card_top{
+    height: 300px;
+
+}
+
+.card_top img{
+    width: 100%;
+    height: 100%;
+}
+
+.card_info{
+    color: var(--font-primary);
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.card_info h4{
+    font-size: 1.375rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { movieAPIKEY } from "../../app/api/apiSlice";
 import { useGetMoviesQuery } from "../../app/reducers/movie/movieApi";
@@ -14,7 +14,6 @@ interface apiReq {
 }
 
 export const Home = () => {
-  const [test, setTest] = useState<any>();
   const dispatch = useDispatch();
   const { data, isLoading, isFetching, isError, isSuccess } = useGetMoviesQuery(
     {
@@ -25,7 +24,9 @@ export const Home = () => {
   );
 
   useEffect(() => {
-    dispatch(addMovie(data?.Search));
+    if (isSuccess) {
+      dispatch(addMovie(data?.Search));
+    }
   }, [data]);
 
   if (isLoading) return <h2>"Loading..."</h2>;
