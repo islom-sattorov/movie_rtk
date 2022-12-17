@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { movieAPIKEY } from "../../app/api/apiSlice";
 import { useGetMoviesQuery } from "../../app/reducers/movie/movieApi";
 import { addMovie } from "../../app/reducers/movie/movieSlice";
+import { Loader } from "../../components/Loader/Loader";
 import { MovieList } from "../../components/MovieList/MovieList";
 import { movieData } from "../../types/types";
 import style from "./Home.module.css";
@@ -29,7 +30,7 @@ export const Home = () => {
     }
   }, [data]);
 
-  if (isLoading) return <h2>"Loading..."</h2>;
+  if (isLoading) return <Loader />;
 
   if (isFetching) return <h2>Get new movies</h2>;
 
