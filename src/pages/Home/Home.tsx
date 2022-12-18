@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { movieAPIKEY } from "../../app/api/apiSlice";
 import { useGetMoviesQuery } from "../../app/reducers/movie/movieApi";
 import { addMovie } from "../../app/reducers/movie/movieSlice";
+import { useGetShowsQuery } from "../../app/reducers/shows/showsApi";
+import { addShows } from "../../app/reducers/shows/showsSlice";
 import { Loader } from "../../components/Loader/Loader";
 import { MovieList } from "../../components/MovieList/MovieList";
 import { movieData } from "../../types/types";
@@ -22,20 +24,35 @@ export const Home = () => {
     {
       apiKey: movieAPIKEY,
       s: "Harry",
-      type: "Movie",
+      type: "movie",
       page: page,
     }
   );
+
+  const {
+    data: dataShow,
+    isLoading: isLoadingShow,
+    isFetching: isFetchingShow,
+    isSuccess: isSuccessShow,
+  } = useGetShowsQuery({
+    apiKey: movieAPIKEY,
+    s: "Harry",
+    type: "series",
+    page: page,
+  });
 
   useEffect(() => {
     if (isSuccess) {
       dispatch(addMovie(data?.Search));
     }
-  }, [data]);
+    if (isSuccessShow) {
+      dispatch(addShows(dataShow?.Search));
+    }
+  }, [data, dataShow]);
 
-  if (isLoading) return <Loader />;
+  if (isLoading || isLoadingShow) return <Loader />;
 
-  if (isFetching) return <Loader />;
+  if (isFetching || isFetchingShow) return <Loader />;
 
   if (isError) return <h2>Something went wrong</h2>;
 
@@ -53,7 +70,9 @@ export const Home = () => {
           >
             {"<"}
           </button>
-          <p>{page}</p>
+          <p>
+            {page}...{Math.ceil(data?.totalResults / 10)}
+          </p>
           <button
             onClick={() => {
               if (data?.Search.length > 1) {

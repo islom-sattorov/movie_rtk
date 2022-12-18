@@ -9,6 +9,6 @@ export const movieAPIKEY = "ae80e808";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: `${movieAPI}` }),
-  tagTypes: ["Movie"],
+  tagTypes: ["Movie", "Series"],
   endpoints: (build) => ({}),
 });
