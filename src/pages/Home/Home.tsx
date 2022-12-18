@@ -19,15 +19,20 @@ interface apiReq {
 export const Home = () => {
   const [page, setPage] = useState<number>(1);
 
+  const movieSearch = "Harry";
+  const showSearch = "Friends";
+
   const dispatch = useDispatch();
   const { data, isLoading, isFetching, isError, isSuccess } = useGetMoviesQuery(
     {
       apiKey: movieAPIKEY,
-      s: "Harry",
+      s: movieSearch,
       type: "movie",
       page: page,
     }
   );
+
+  console.log(data);
 
   const {
     data: dataShow,
@@ -36,7 +41,7 @@ export const Home = () => {
     isSuccess: isSuccessShow,
   } = useGetShowsQuery({
     apiKey: movieAPIKEY,
-    s: "Harry",
+    s: showSearch,
     type: "series",
     page: page,
   });
