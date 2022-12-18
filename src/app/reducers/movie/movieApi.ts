@@ -2,12 +2,15 @@ import { apiSlice } from "../../api/apiSlice";
 
 export const movieApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getMovies: build.query<any, { apiKey: string; s: string; type: string }>({
+    getMovies: build.query<
+      any,
+      { apiKey: string; s: string; type: string; page: number }
+    >({
       query: (arg) => {
-        const { apiKey, s, type } = arg;
+        const { apiKey, s, type, page } = arg;
         return {
           url: ``,
-          params: { apiKey, s, type },
+          params: { apiKey, s, type, page },
         };
       },
       providesTags: ["Movie"],
