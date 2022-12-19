@@ -3,9 +3,9 @@ import { BiSearch } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { movieAPIKEY } from "../../app/api/apiSlice";
-import { useGetMoviesQuery } from "../../app/reducers/movie/movieApi";
+import { useLazyGetMoviesQuery } from "../../app/reducers/movie/movieApi";
 import { addMovie } from "../../app/reducers/movie/movieSlice";
-import { useGetShowsQuery } from "../../app/reducers/shows/showsApi";
+import { useLazyGetShowsQuery } from "../../app/reducers/shows/showsApi";
 import { addShows } from "../../app/reducers/shows/showsSlice";
 import user from "../../images/user.png";
 import { Loader } from "../Loader/Loader";
@@ -15,28 +15,39 @@ export const Header = () => {
   const [term, setTerm] = useState("");
   const dispatch = useDispatch();
 
-  const { data, isLoading, isFetching, isSuccess, isError } = useGetMoviesQuery(
+  // const { data, isLoading, isFetching, isSuccess, isError } = useGetMoviesQuery(
+  //   {
+  //     apiKey: movieAPIKEY,
+  //     s: term,
+  //     type: "Movie",
+  //     page: 1,
+  //   }
+  // );
+
+  // const {
+  //   data: dataShow,
+  //   isLoading: isLoadingShow,
+  //   isFetching: isFetchingShow,
+  //   isSuccess: isSuccessShow,
+  // } = useGetShowsQuery({
+  //   apiKey: movieAPIKEY,
+  //   s: term,
+  //   type: "series",
+  //   page: 1,
+  // });
+
+  const [trigger, { data, isSuccess, isLoading, isError, isFetching }] =
+    useLazyGetMoviesQuery();
+
+  const [
+    triggerShow,
     {
-      apiKey: movieAPIKEY,
-      s: term,
-      type: "Movie",
-      page: 1,
-    }
-  );
-
-  const {
-    data: dataShow,
-    isLoading: isLoadingShow,
-    isFetching: isFetchingShow,
-    isSuccess: isSuccessShow,
-  } = useGetShowsQuery({
-    apiKey: movieAPIKEY,
-    s: term,
-    type: "series",
-    page: 1,
-  });
-
-  console.log(data);
+      data: dataShow,
+      isSuccess: isSuccessShow,
+      isFetching: isFetchingShow,
+      isLoading: isLoadingShow,
+    },
+  ] = useLazyGetShowsQuery();
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,6 +64,8 @@ export const Header = () => {
   }, [data, dataShow]);
 
   if (isLoading || isLoadingShow) return <Loader />;
+
+  if (isFetching || isFetchingShow) return <Loader />;
 
   if (isError) return <h2>Something went wrong</h2>;
 
@@ -72,7 +85,23 @@ export const Header = () => {
             }
             placeholder="Search"
           />
-          <button type="submit">
+          <button
+            onClick={() => {
+              trigger({
+                apiKey: movieAPIKEY,
+                s: term,
+                type: "movie",
+                page: 1,
+              });
+              triggerShow({
+                apiKey: movieAPIKEY,
+                s: term,
+                type: "series",
+                page: 1,
+              });
+            }}
+            type="submit"
+          >
             <i className={style.search_icon}>
               <BiSearch />
             </i>

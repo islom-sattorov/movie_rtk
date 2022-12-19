@@ -18,7 +18,7 @@ export const showApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetShowsQuery } = showApi;
+export const { useGetShowsQuery, useLazyGetShowsQuery } = showApi;
 
 // https://www.omdbapi.com/?apiKey=ae80e808&s=Harry&type=Movie&page=1
 // https://www.omdbapi.com/?apiKey=ae80e808?s=Harry&type=Movie&page=1

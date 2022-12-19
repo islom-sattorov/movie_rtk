@@ -10,5 +10,6 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: `${movieAPI}` }),
   tagTypes: ["Movie", "Series", "Detail"],
+  keepUnusedDataFor: 30,
   endpoints: (build) => ({}),
 });

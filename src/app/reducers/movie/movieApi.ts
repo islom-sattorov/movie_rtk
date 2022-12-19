@@ -18,7 +18,7 @@ export const movieApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetMoviesQuery } = movieApi;
+export const { useGetMoviesQuery, useLazyGetMoviesQuery } = movieApi;
 
 // export const movieApi = apiSlice.injectEndpoints({
 //     endpoints: (build) => ({

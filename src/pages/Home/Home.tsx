@@ -32,8 +32,6 @@ export const Home = () => {
     }
   );
 
-  console.log(data);
-
   const {
     data: dataShow,
     isLoading: isLoadingShow,
